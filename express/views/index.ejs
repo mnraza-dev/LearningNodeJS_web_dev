@@ -9,11 +9,27 @@
 
 <body>
     <h1> Form Handling </h1>
-    <form action="/form-submit" method="POST">
+    <!-- <form action="/form-submit" method="POST">
         <input type="text" name="name" id="" placeholder="Enter your name">
         <input type="email" name="email" id="" placeholder="Enter your email">
         <input type="password" name="password" id="" placeholder="Enter your password">
         <input type="submit" value="Submit"/>
+    </form> -->
+
+
+    <form action="/data" method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password"><br>
+        <label for="age" >Age:</label><br>
+        <input type="number" id="age" name="age"><br>
+        <label for="phone" >Phone:</label><br>
+        <input type="number" id="phone" name="phone"><br> <br>
+      
+        <input type="submit" value="Submit">
     </form>
 </body>
 </html>
