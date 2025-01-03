@@ -5,32 +5,296 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Uploader</title>
-    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        /* Importing a modern font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #111, #333);
+            color: #fff;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            font-weight: 400;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .cta-button {
+            padding: 16px 36px;
+            background-color: #00c7ff;
+            color: #111;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background-color: #fff;
+            color: #00c7ff;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background-color: #00c7ff;
+            transition: all 0.5s ease;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .cta-button:hover::before {
+            width: 0;
+            height: 0;
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Animations for fade-in and slide-up */
+        @keyframes slideUp {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Form Section */
+        .form-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+            background-color: #222;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            margin: 0 -20px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+            border-radius: 12px;
+            background-color: #333;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .form-group input[type="file"] {
+            width: 94%;
+            padding: 16px;
+            border: 2px solid #444;
+            border-radius: 10px;
+            background-color: #222;
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            display: block;
+        }
+
+        .form-group input[type="file"]:hover {
+            border-color: #00c7ff;
+        }
+
+        .form-group input[type="file"]:focus {
+            border-color: #00c7ff;
+            background-color: #333;
+        }
+
+        .form-group label {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            font-size: 14px;
+            color: #888;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input[type="file"]:focus ~ label,
+        .form-group input[type="file"]:valid ~ label {
+            top: -10px;
+            left: 10px;
+            font-size: 12px;
+            color: #00c7ff;
+        }
+
+        .form-group input[type="submit"] {
+            width: 100%;
+            padding: 16px;
+            background-color: #00c7ff;
+            color: #111;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #00a6cc;
+        }
+
+        /* Image Upload Feedback */
+        .uploaded-images {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .uploaded-images h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #00c7ff;
+            margin-bottom: 20px;
+        }
+
+        .uploaded-images img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .uploaded-images img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer Section */
+        .footer {
+            background: #111;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Image Uploader</h1>
-    <div class="container">
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <div class="upload-section">
-                <div class="form-group">
-                    <input type="file" name="file" id="file-input">
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Uplaod" />
 
-                </div>
-            </div>
-        </form>
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Upload Your Images Effortlessly</h1>
+        <p>Our image uploader makes sharing files fast and simple. Try it now!</p>
+        <button class="cta-button" onclick="scrollToForm()"><span>Get Started</span></button>
     </div>
+
+    <!-- Form Section -->
+    <div class="form-section" id="upload-form">
+        <div class="form-container">
+            <h2>Upload Your Image</h2>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="file" name="file" id="file-input" required />
+                    <label for="file-input">Choose a file...</label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Upload" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Upload Feedback -->
     <div class="uploaded-images">
         <% if(url){ %>
-            <h2>File Uplaode Successfully ✅</h2>
-            <img src="<%= url %>" alt="Uploaded Image" />
-
-            <% } %>
-
+        <h2>File Uploaded Successfully ✅</h2>
+        <img src="<%= url %>" alt="Uploaded Image" />
+        <% } %>
     </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2025 ImageUploader. All rights reserved.</p>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+    </div>
+
+    <script>
+        // Function to scroll to the form section
+        function scrollToForm() {
+            document.getElementById('upload-form').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
 
 </body>
 
