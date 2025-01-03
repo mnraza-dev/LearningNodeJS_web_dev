@@ -3,6 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import path from 'path';
 import { User } from './models/User.js';
+import { UserRegisterController } from './controller/UserController.js';
 
 const port = 3002;
 const app = express();
@@ -52,25 +53,7 @@ app.post('/form-submit', (req, res) => {
         });
 });
 
-app.post('/data', async (req, res) => {
-    console.log(req.body);
-    try {
-        let user = await User.create(req.body);
-        res.json({
-            message: 'User Created successfully ✅',
-            user: user,
-            success: true
-        });
-
-    } catch (error) {
-        res.json({
-            message: error.message,
-            success: false
-        });
-    }
-
-
-});
+app.post('/data', UserRegisterController);
 
 
 app.get('/products', (req, res) => {
