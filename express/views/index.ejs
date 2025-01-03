@@ -8,9 +8,12 @@
 </head>
 
 <body>
-    <h1> Hello there from ejs </h1>
-    <h2>
-        <%= title %>
-    </h2>
+    <h1> Form Handling </h1>
+    <form action="/form-submit" method="POST">
+        <input type="text" name="name" id="" placeholder="Enter your name">
+        <input type="email" name="email" id="" placeholder="Enter your email">
+        <input type="password" name="password" id="" placeholder="Enter your password">
+        <input type="submit" value="Submit"/>
+    </form>
 </body>
 </html>
