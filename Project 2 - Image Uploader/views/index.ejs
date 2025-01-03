@@ -97,6 +97,7 @@
                 transform: translateY(50px);
                 opacity: 0;
             }
+
             100% {
                 transform: translateY(0);
                 opacity: 1;
@@ -107,6 +108,7 @@
             0% {
                 opacity: 0;
             }
+
             100% {
                 opacity: 1;
             }
@@ -177,8 +179,8 @@
             transition: all 0.3s ease;
         }
 
-        .form-group input[type="file"]:focus ~ label,
-        .form-group input[type="file"]:valid ~ label {
+        .form-group input[type="file"]:focus~label,
+        .form-group input[type="file"]:valid~label {
             top: -10px;
             left: 10px;
             font-size: 12px;
@@ -273,11 +275,11 @@
     </div>
 
     <!-- Upload Feedback -->
-    <div class="uploaded-images">
+    <div class="uploaded-images" id="preview-image">
         <% if(url){ %>
-        <h2>File Uploaded Successfully ✅</h2>
-        <img src="<%= url %>" alt="Uploaded Image" />
-        <% } %>
+            <h2>File Uploaded Successfully ✅</h2>
+            <img src="<%= url %>" alt="Uploaded Image" />
+            <% } %>
     </div>
 
     <!-- Footer Section -->
@@ -288,12 +290,24 @@
     </div>
 
     <script>
-        // Function to scroll to the form section
         function scrollToForm() {
             document.getElementById('upload-form').scrollIntoView({
                 behavior: 'smooth'
             });
         }
+
+        function scrollToPreview() {
+            document.getElementById('preview-image').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        window.onload = function () {
+            const url = "<%= url %>";
+            if (url) {
+                scrollToPreview();
+            }
+        };
     </script>
 
 </body>
